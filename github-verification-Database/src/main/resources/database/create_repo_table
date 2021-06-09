@@ -1,0 +1,18 @@
+CREATE TABLE repo
+(
+    repo_id    INTEGER     NOT NULL
+        CONSTRAINT repo_pk
+            PRIMARY KEY,
+    name       VARCHAR(50) NOT NULL,
+    is_checked BOOLEAN     NOT NULL,
+    check_date timestamp,
+    student_id INTEGER     NOT NULL
+        CONSTRAINT repo_student__fk
+            REFERENCES student
+            ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+ALTER TABLE repo OWNER TO githubver;
+
+CREATE UNIQUE INDEX repo_name_uindex ON repo(name);
+
